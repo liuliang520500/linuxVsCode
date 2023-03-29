@@ -1,0 +1,21 @@
+version: '2.1'
+services:
+  code-server:
+    image: linuxserver/code-server
+    container_name: code-server
+    environment:
+      - PUID=1026
+      - PGID=100
+      - DEFAULT_WORKSPACE=/workspace
+      - PASSWORD=123456
+      - TZ=Asia/Shanghai
+      - JDK_HOME=/runtime/java/jdk-11.0.14.1
+      - JAVA_HOME=/runtime/java/jdk-11.0.14.1
+      - PATH=/app/code-server/lib/vscode/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/runtime/apache-maven-3.6.2-bin/apache-maven-3.6.2/bin
+    volumes:
+      - /volume3/docker/vscode/config:/config
+      - /volume3/docker/vscode/workspace:/workspace
+      - /volume3/docker/vscode/runtime:/runtime
+    ports:
+      - 80:8443
+    restart: unless-stopped
